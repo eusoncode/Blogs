@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Ignore the virtual environment folder
+django_blog_venv/
+
+# Django-specific files
+db.sqlite3
+*.log
+
+# Static and media files
+staticfiles/
+media/
+
+# Secret settings
+.env
+config/settings/local.py
+
+# IDE / Editor files
+.vscode/
+.idea/

@@ -5,8 +5,8 @@ from django.shortcuts import render
 def starting_page(request):
     return render(request, "blogs/index.html")
 
-def posts():
-    pass
+def posts(request):
+    return render(request, "blogs/all-posts.html")
 
-def post_detail():
-    pass
+def post_detail(request):
+    return render(request, "blogs/all-posts.html")

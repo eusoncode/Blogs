@@ -82,7 +82,12 @@ def starting_page(request):
     })
 
 def posts(request):
-    return render(request, "blogs/all-posts.html")
+    return render(request, "blogs/all-posts.html", {
+        "all_posts": all_posts
+    })
 
 def post_detail(request, slug):
-    return render(request, "blogs/post-detail.html")
+    identified_post = next(post for post in all_posts if post['slug'] == slug)
+    return render(request, "blogs/post-detail.html", {
+        "post": identified_post
+    })

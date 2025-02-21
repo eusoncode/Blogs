@@ -1,7 +1,51 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}My Blogs{% endblock %}
 
+{%block css_files%}
+  <link rel="stylesheet" href="{% static "blogs/index.css" %}" />
+{%endblock%}
+
 {% block content %}
-  <h1>Welcome to my blogs</h1>
+  <header id="main-navigation">
+    <h1><a href="">Eustace's Blogs</a></h1>
+    <nav>
+      <a href="">All Posts</a>
+    </nav>
+  </header>
+  <section id="welcome">
+    <header>
+      <img src="" alt="Eustace -  The Author Of These Blogs"/>
+      <h2>EUSTACE'S BLOGS</h2>
+    </header>
+    <p>Hi, I am Eustace and I love to blog about coding and the world!</p>
+  </section>
+  <section id="latest-posts">
+    <h2>My latest Thoughts</h2>
+    <ul>
+      <li>
+        <article class="post">
+          <a href="">
+            <img src="" alt="Moutain Hiking"/>
+            <div class="post__content">
+              <h3>Moutain Hiking</h3>
+              <p>
+                There's nothing like the views you get when hiking in the moutains! And I wasn't even prepared for what happened whilst was enjoyng the view!
+              </p>
+            </div>
+          </a>
+        </article>
+      </li>
+    </ul>
+  </section>
+  <section id="about">
+    <h2>What I Do</h2>
+    <p>
+      I love coding, I love to help others and I enjoy exploring new technologies in general
+    </p>
+    <p>
+      My goal is to keep on growing as a developer - and if I could help you do the same, I'd be glad to!
+    </p>
+  </section>
 {% endblock %}

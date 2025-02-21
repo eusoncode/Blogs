@@ -4,8 +4,8 @@
 {% block title %}My Blogs{% endblock %}
 
 {%block css_files%}
-  <link rel="stylesheet" href="{% static "blogs/index.css" %}" />
-  <link rel="stylesheet" href="{% static "blogs/post.css" %}" />
+  <link rel="stylesheet" href="{% static "blogs/styles/index.css" %}" />
+  <link rel="stylesheet" href="{% static "blogs/styles/post.css" %}" />
 {%endblock%}
 
 {% block content %}
@@ -17,7 +17,7 @@
   </header>
   <section id="welcome">
     <header>
-      <img src="" alt="Eustace -  The Author Of These Blogs"/>
+      <img src="{% static "blogs/images/Eustace.jpg" %}" alt="Eustace -  The Author Of These Blogs"/>
       <h2>EUSTACE'S BLOGS</h2>
     </header>
     <p>Hi, I am Eustace and I love to blog about coding and the world!</p>
@@ -28,7 +28,7 @@
       <li>
         <article class="post">
           <a href="">
-            <img src="" alt="Moutain Hiking"/>
+            <img src="{% static "blogs/images/mountains.jpg" %}" alt="Mountain Hiking"/>
             <div class="post__content">
               <h3>Moutain Hiking</h3>
               <p>

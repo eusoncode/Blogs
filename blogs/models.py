@@ -25,7 +25,7 @@ class Post(models.Model):
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name='posts')
     date = models.DateField(auto_now=True)
-    tag = models.ManyToManyField(Tag, blank=True, null=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return f'{self.title} {self.author} {self.date}'

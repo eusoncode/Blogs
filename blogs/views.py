@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from datetime import date
 from .models import Post
 
 # Helper functions
@@ -23,5 +22,6 @@ def posts(request):
 def post_detail(request, slug):
     identified_post = get_object_or_404(Post, slug=slug)
     return render(request, "blogs/post-detail.html", {
-        "post": identified_post
+        "post": identified_post,
+        "tags": identified_post.tags.all()
     })

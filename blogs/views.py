@@ -2,6 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+from .forms import CommentForm
 from django.views.generic import ListView, DetailView
 
 # Helper functions
@@ -36,5 +37,6 @@ class DetailPostView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = self.object.tags.all()  # type: ignore # Get related tags
+        context['comment_form'] = CommentForm()
         return context 
 

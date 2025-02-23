@@ -30,7 +30,13 @@
 
 <div>
   <form>
-    {{comment_form}}
+    {%for form_field in comment_form%}
+      <div class="form-control">
+        {{comment_form.labels}}
+        {{comment_form}}
+        {{comment_form.errors}}
+      </div>
+    {%endfor%}
     <button>Save</button>
   </form>
 </div>

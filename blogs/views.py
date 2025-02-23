@@ -1,5 +1,8 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+from django.views.generic import ListView, DetailView
 
 # Helper functions
 def get_date(post):
@@ -7,21 +10,31 @@ def get_date(post):
 
 # Create your views here.
 
-def starting_page(request):
-    latest_posts = Post.objects.all().order_by('-date')[:3] # Most recent 3 posts
-    return render(request, "blogs/index.html", {
-        "posts": latest_posts
-    })
+class StartingPageView(ListView):
+    template_name = "blogs/index.html"
+    model = Post
+    ordering = ['-date']
+    context_object_name = 'posts'
 
-def posts(request):
-    all_posts = Post.objects.all().order_by('-date')
-    return render(request, "blogs/all-posts.html", {
-        "all_posts": all_posts
-    })
 
-def post_detail(request, slug):
-    identified_post = get_object_or_404(Post, slug=slug)
-    return render(request, "blogs/post-detail.html", {
-        "post": identified_post,
-        "tags": identified_post.tags.all()
-    })
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        data = queryset[:3]
+        return data
+
+class AllPostView(ListView):
+    template_name = 'blogs/all-posts.html'
+    model = Post
+    ordering = ['-date']
+    context_object_name = 'all_posts'
+
+
+class DetailPostView(DetailView):
+    template_name = 'blogs/post-detail.html'
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tags'] = self.object.tags.all()  # type: ignore # Get related tags
+        return context 
+

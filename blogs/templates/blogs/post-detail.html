@@ -37,6 +37,11 @@
 </main>
 
 <section id="comments">
+  {%if not comments%}
+    <div id="no-coments">
+      <h2> Please add comments 😊!!!</h2>
+    </div>
+  {%endif%}
   <ul>
     {%for comment in comments%}
       <li>

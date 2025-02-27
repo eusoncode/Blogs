@@ -23,6 +23,13 @@
       <span class="tag">{{tag.caption}}</span>
     {%endfor%}
   </div>
+  <div id="read-later">
+    <form action="{% url "read-later" post.slug %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" value="{{post.id}}" name="post_id">
+      <button>Read Later</button>
+    </form>
+  </div>
   <article>
     <img src="{{post.image.url}}" alt="{{post.title}}" />
     <address>
@@ -37,25 +44,26 @@
 </main>
 
 <section id="comments">
-  {%if not comments%}
-    <div id="no-coments">
-      <h2> Please add comments 😊!!!</h2>
+  {% if not comments %}
+    <div id="no-comments">
+      <h2>Please add comments 😊</h2>
     </div>
-  {%endif%}
-  <ul>
-    {%for comment in comments%}
-      <li>
-        <h2>{{comment.user_name}}</h2>
-        <p>{{comment.text|linebreaks}}</p>
-      </li>
-
-    {%endfor%}
-  </ul>
+  {% else %}
+    <ul>
+      {% for comment in comments %}
+        <li>
+          <h2>{{ comment.user_name }}</h2>
+          <p>{{ comment.text|linebreaks }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </section>
 
 <section id="comment-form">
   <h2>Your Comment</h2>
   <form action="{% url "post-detail-page" post.slug %}" method="POST">
+    {% csrf_token %}
     {%for form_field in comment_form%}
       <div class="form-control {% if form_field.errors%}invalid{% endif %}">
         {{form_field.label_tag}}
@@ -63,7 +71,6 @@
         {{form_field.errors}}
       </div>
     {%endfor%}
-    {%csrf_token%}
     <button>Save</button>
   </form>
 </section>

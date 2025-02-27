@@ -186,3 +186,38 @@ main {
   margin-bottom: 0.25rem;
 }
 
+#read-later {
+  margin: 2rem 0;
+}
+
+#read-later button {
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 0.5rem 2rem;
+  font: inherit;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#read-later button:hover,
+#read-later button:active {
+  background-color: white;
+  border-color:  #390281;
+  color: #4f0ba7;
+}
+
+#no-comments {
+  display: flex;
+  justify-content: center; /* ✅ Centers text horizontally */
+  align-items: center; /* ✅ Centers text vertically */
+  width: 100%; /* ✅ Takes full width of parent */
+}
+
+#no-comments h2 {
+  margin: 0 auto; /* ✅ Ensures text stays centered */
+  font-size: 1.5rem;
+  color: #390281;
+  text-align: center;
+}
+

@@ -33,6 +33,7 @@ class AllPostView(ListView):
 
 
 class DetailPostView(View):
+    """ Helper function"""
     def is_stored_post(self, request, post_id):
         stored_posts = request.session.get('stored_posts')
         if stored_posts is not None:
@@ -41,7 +42,8 @@ class DetailPostView(View):
             is_saved_for_later = False
         
         return is_saved_for_later
-
+    
+    """ GET - POST Request """
     def get(self, request, slug):
         post = Post.objects.get(slug=slug)
         context = {
@@ -49,7 +51,7 @@ class DetailPostView(View):
             "tags": post.tags.all(),
             "comment_form": CommentForm(),
             "comments": post.comments.all().order_by("-id"), # type: ignore
-            "saved_for_later": self.is_stored_post(request, post.id)
+            "saved_for_later": self.is_stored_post(request, post.id) # type: ignore
         }
         return render(request, "blogs/post-detail.html", context)
 

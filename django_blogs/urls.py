@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls), # http://localhost:8000/admin
     path('', RedirectView.as_view(url='/blogs')), # http://localhost:8000/ redirect to # http://localhost:8000/blogs
     path('blogs/', include('blogs.urls')),  # http://localhost:8000/blogs & # http://localhost:8000/blogs/posts  & # http://localhost:8000/posts/my-first-post
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

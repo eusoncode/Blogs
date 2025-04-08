@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from os import getenv
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,17 +23,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = getenv("SECRET_KEY")
-SECRET_KEY = 'django-insecure-1t2*o!+(!tf58z&i%zh)ya5$ogy0-e7sbysux2s4w2g5r-yuk6'
+# SECRET_KEY = 'django-insecure-1t2*o!+(!tf58z&i%zh)ya5$ogy0-e7sbysux2s4w2g5r-yuk6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = getenv("IS_DEVELOPMENT", True)
-DEBUG = getenv("IS_DEVELOPMENT", "True").lower() == "true"
+# DEBUG = getenv("IS_DEVELOPMENT", "True").lower() == "true"
 
 # ALLOWED_HOSTS = [
 #   getenv("APP_HOST")
 # ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'nginx']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'nginx']
+
+DEBUG = config('DEBUG', default=True, cast=bool)
+SECRET_KEY = config('SECRET_KEY')
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS').split()
 
 
 # Application definition
@@ -83,12 +88,24 @@ WSGI_APPLICATION = 'django_blogs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('POSTGRES_HOST'),
+        'PORT': config('POSTGRES_PORT'),
     }
 }
+
 
 
 # Password validation

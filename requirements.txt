@@ -1,6 +1,8 @@
 asgiref==3.4.1
 Django==3.2.25
 pillow==11.1.0
+python-decouple==3.8
 pytz==2025.1
 sqlparse==0.4.4
 typing_extensions==4.1.1
+psycopg2-binary==2.9.9

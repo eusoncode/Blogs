@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: django_blogs
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/uploads
+    expose:
+      - "8000"
+    environment:
+      - DEBUG=True
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_volume:/app/staticfiles
+      - media_volume:/app/uploads
+    depends_on:
+      - web
+
+volumes:
+  static_volume:
+  media_volume:

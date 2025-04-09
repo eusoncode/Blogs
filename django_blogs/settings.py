@@ -157,6 +157,7 @@ USE_TZ = True
 
 
 CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 
 
 # Static files (CSS, JavaScript, Images)

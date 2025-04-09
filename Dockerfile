@@ -19,4 +19,4 @@ ENV PYTHONUNBUFFERED 1
 EXPOSE 8000
 
 # Run server
-CMD ["gunicorn", "your_project_name.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "django_blogs.wsgi:application", "--bind", "0.0.0.0:8000"]

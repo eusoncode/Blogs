@@ -56,6 +56,19 @@ services:
       - media_volume:/app/uploads
     depends_on:
       - web
+    
+  worker:
+    build: .
+    container_name: celery_worker
+    command: celery -A django_blogs worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - web
+      - rabbitmq
+    env_file:
+      - .env
+
 
 volumes:
   static_volume:

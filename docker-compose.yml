@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:15
@@ -9,6 +11,22 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    restart: always
+
   web:
     build: .
     container_name: django_blogs
@@ -18,8 +36,12 @@ services:
       - .:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/uploads
+    command: python manage.py runserver 0.0.0.0:8000
+    # command: gunicorn django_blogs.wsgi:application --bind 0.0.0.0:8000 # FOR PRODUCTION
     depends_on:
       - db
+      - redis
+      - rabbitmq
     expose:
       - "8000"
 
